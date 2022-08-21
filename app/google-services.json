@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "207915031864",
+    "firebase_url": "https://software-job-alert-default-rtdb.firebaseio.com",
+    "project_id": "software-job-alert",
+    "storage_bucket": "software-job-alert.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:207915031864:android:dcdc9db414703ef8c475cd",
+        "android_client_info": {
+          "package_name": "com.example.softwarejobalert"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "207915031864-pflp9bpgoi33hmns8t2ra30eu9kii9nh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeSfn9zooN-n9zX9T_K9LtAP7HFDFjtjI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "207915031864-pflp9bpgoi33hmns8t2ra30eu9kii9nh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
