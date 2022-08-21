@@ -1,7 +1,11 @@
 package com.example.softwarejobalert.CompanyList
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -38,7 +42,8 @@ class companyListFragment : Fragment() {
     lateinit var binding :FragmentCompanyList2Binding
     lateinit var adapter : CompanyListAdapter
     private lateinit var database: DatabaseReference
-
+lateinit var edit:SharedPreferences.Editor
+lateinit var read:SharedPreferences
     var companyList : ArrayList<CompanyModel> = ArrayList()
     var companyInfoList: ArrayList<CompanyInfoModel> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,12 +62,16 @@ class companyListFragment : Fragment() {
 
         binding = FragmentCompanyList2Binding.inflate(layoutInflater)
 
-
-        adapter = CompanyListAdapter(requireActivity(),companyList)
+    edit=requireContext().getSharedPreferences("com.softwareAlet", Context.MODE_PRIVATE).edit()
+        read =requireContext().getSharedPreferences("com.softwareAlet", Context.MODE_PRIVATE)
+        adapter = CompanyListAdapter(requireActivity())
+        adapter.setList(companyList)
 adapter.setCallback(object :ClickCallback{
     override fun subscribeButtonClick(position: Int) {
+var companyName = companyList.get(position).companyName
+        var isSubscribed = read.getString(companyName,"0")
 
-        if(companyList.get(position).Subscribed==0){
+        if(isSubscribed.equals("0")){
 
 
 
@@ -88,11 +97,47 @@ adapter.setCallback(object :ClickCallback{
 
         database = Firebase.database.reference
         readData()
+        readSeachText()
 
         return binding.root
     }
 
-fun subscribeToTopic(topic: String,position:Int){
+    private fun readSeachText() {
+        binding.searchEditText.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                var tempList:ArrayList<CompanyModel> =ArrayList()
+                var tempP= p0.toString().lowercase()
+                if(tempP.isEmpty()){
+                    tempList=companyList
+                }
+                else {
+                    for (i in companyList) {
+
+                        var companyName = i.companyName.lowercase()
+
+                        if (companyName.contains(tempP)) {
+                            tempList.add(i)
+                        }
+
+
+                    }
+                }
+                adapter.setList(tempList)
+                adapter.notifyDataSetChanged()
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+
+        })
+    }
+
+    fun subscribeToTopic(topic: String,position:Int){
     Firebase.messaging.subscribeToTopic(topic)
         .addOnCompleteListener { task ->
             var msg = "Subscribed"
@@ -102,12 +147,14 @@ fun subscribeToTopic(topic: String,position:Int){
             else{
 
 
-                database.get().addOnCompleteListener {
-
-                    it.result.ref.child("CompanyList").child("$position").child("subscribed").setValue(1)
-                }
-
-
+//                database.get().addOnCompleteListener {
+//
+//                    it.result.ref.child("CompanyList").child("$position").child("subscribed").setValue(1)
+//                }
+                var companyName = companyList.get(position).companyName
+                edit.putString(companyName,"1")
+                edit.apply()
+                   adapter.notifyDataSetChanged()
             }
 
             Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
@@ -126,10 +173,16 @@ fun subscribeToTopic(topic: String,position:Int){
                 else{
 
 
-                    database.get().addOnCompleteListener {
+//                    database.get().addOnCompleteListener {
+//
+//                        it.result.ref.child("CompanyList").child("$position").child("subscribed").setValue(0)
+//                    }
 
-                        it.result.ref.child("CompanyList").child("$position").child("subscribed").setValue(0)
-                    }
+
+                    var companyName = companyList.get(position).companyName
+                    edit.putString(companyName,"0")
+                     edit.apply()
+                    adapter.notifyDataSetChanged()
 
                 }
 

@@ -10,6 +10,7 @@ import com.example.softwarejobalert.databinding.ActivityCompanyListBinding
 class companyListActivity : AppCompatActivity() {
 
     lateinit var binding:ActivityCompanyListBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCompanyListBinding.inflate(layoutInflater)

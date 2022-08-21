@@ -9,6 +9,7 @@ import android.os.Build
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
+import com.example.softwarejobalert.CompanyList.companyListActivity
 import com.example.softwarejobalert.MainActivity
 import com.example.softwarejobalert.R
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -26,7 +27,7 @@ class MyFirebaseMessagingService:FirebaseMessagingService() {
 
     fun generateNotification(context: Context, title: String, message: String){
 
-        val intent = Intent(context, MainActivity::class.java)
+        val intent = Intent(context, companyListActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 
 

@@ -35,11 +35,17 @@ class NotifBroadcastReceiver: BroadcastReceiver() {
 
            var MsgBody = p1.getExtras()!!.get("gcm.notification.body").toString()
           var  MsgTitle = p1.getExtras()!!.get("gcm.notification.title").toString()
-          var info=p1.getExtras()!!.get("info").toString()
-            var link = p1.getExtras()!!.get("link").toString()
+          var role=p1.getExtras()!!.get("role").toString()
+            var role_info = p1.getExtras()!!.get("role_info").toString()
+
+            var image = p1.getExtras()!!.get("image").toString()
+            var apply_link = p1.getExtras()!!.get("apply_link").toString()
+
             var jsonObject = JSONObject()
-            jsonObject.put("info",info)
-            jsonObject.put("link",link)
+            jsonObject.put("role",role)
+            jsonObject.put("role_info",role_info)
+            jsonObject.put("image",image)
+            jsonObject.put("apply_link",apply_link)
             addNotificationData(p0!!,jsonObject)
 
 //            for (key in p1?.getExtras()!!.keySet()) {

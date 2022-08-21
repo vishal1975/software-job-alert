@@ -1,11 +1,16 @@
 package com.example.softwarejobalert.NotificationList
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.softwarejobalert.R
+import com.example.softwarejobalert.databinding.FragmentNotificationListBinding
+import org.json.JSONArray
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,7 +26,9 @@ class NotificationsListFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
+lateinit var binding: FragmentNotificationListBinding
+var notificationList :ArrayList<NotificationModel> = ArrayList()
+lateinit var adapter: NotificationListAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -35,7 +42,16 @@ class NotificationsListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notification_list, container, false)
+
+        binding = FragmentNotificationListBinding.inflate(layoutInflater)
+
+        adapter = NotificationListAdapter(requireContext(),notificationList)
+
+        binding.notificationRecyclerview.layoutManager = LinearLayoutManager(requireContext())
+        binding.notificationRecyclerview.adapter = adapter
+        readData()
+
+        return binding.root
     }
 
     companion object {
@@ -57,4 +73,33 @@ class NotificationsListFragment : Fragment() {
                 }
             }
     }
+
+    fun readData(){
+
+        val sh = requireContext().getSharedPreferences("com.softwareAlet",Context.MODE_PRIVATE)
+
+        val data = sh.getString("data","[]")
+        Log.v("data","${data.toString()}")
+        val jsonArray=JSONArray(data.toString())
+        if(jsonArray.length()>0) {
+            for (i in jsonArray.length() - 1 downTo 0) {
+
+                val temp = jsonArray.getJSONObject(i)
+
+                val image = temp.getString("image")
+                val role = temp.getString("role")
+                val role_info = temp.getString("role_info")
+                val apply_link = temp.getString("apply_link")
+                notificationList.add(
+                    NotificationModel(
+                        image, role, role_info, apply_link
+                    )
+                )
+
+            }
+
+            adapter.notifyDataSetChanged()
+        }
+    }
+
 }

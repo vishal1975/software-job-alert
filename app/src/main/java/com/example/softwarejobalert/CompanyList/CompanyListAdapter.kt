@@ -10,11 +10,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.softwarejobalert.R
 
-class CompanyListAdapter(var context:Context, var companyList: ArrayList<CompanyModel>):RecyclerView.Adapter<CompanyViewHolder>() {
+class CompanyListAdapter(var context:Context):RecyclerView.Adapter<CompanyViewHolder>() {
 
      var callback1: ClickCallback?=null
+    var read = context.getSharedPreferences("com.softwareAlet", Context.MODE_PRIVATE)
     fun setCallback(callback: ClickCallback){
         callback1 = callback
+    }
+    var companyList: ArrayList<CompanyModel> = ArrayList()
+    fun setList(companyList1: ArrayList<CompanyModel>){
+        companyList = companyList1
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CompanyViewHolder {
@@ -26,10 +31,11 @@ class CompanyListAdapter(var context:Context, var companyList: ArrayList<Company
 
     override fun onBindViewHolder(holder: CompanyViewHolder, position: Int) {
 
-        val company:CompanyModel = companyList.get(position)
+        val company: CompanyModel = companyList.get(position)
 
         holder.companyName.text = company.companyName
-        if(company.Subscribed==0){
+        var isSubscribed = read.getString(company.companyName,"0")
+        if(isSubscribed.equals("0")){
             holder.subscribeButton.text="subscribe"
         }
         else{
