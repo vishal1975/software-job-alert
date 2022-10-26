@@ -7,6 +7,7 @@
     android:paddingBottom="16dp"
     android:layout_gravity="center"
     android:layout_width="match_parent"
+    android:background="#937DC2"
     android:layout_height="wrap_content">
 
 
@@ -134,8 +135,8 @@
             android:layout_height="35dp"
             android:layout_margin="10dp"
             android:background="@android:color/transparent"
-
-            android:hint="Enter Your Country Name" />
+            android:inputType="number"
+            android:hint="Enter Your Phone No" />
 
     </androidx.cardview.widget.CardView>
     <TextView
@@ -157,10 +158,11 @@
         android:layout_marginEnd="4dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="26dp"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:clickable="true"
 
-        android:backgroundTint="@color/purple_500"
+        android:backgroundTint="#B1B2FF"
         android:text="Register"
+
         android:focusable="true" />
 </androidx.constraintlayout.widget.ConstraintLayout>

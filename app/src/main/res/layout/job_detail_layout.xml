@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#1C1C1E"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        android:layout_margin="10dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+
+    >
+<TextView
+    android:id="@+id/title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Android Developer-java/kotlin"
+    android:textSize="16sp"
+    android:textColor="#B22B27"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+
+    />
+    <TextView
+        android:id="@+id/company_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FreshMart"
+        android:textSize="13sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/detail"
+        android:layout_marginTop="3dp"
+        />
+<ImageView
+    android:id="@+id/bell_imageview"
+    android:layout_width="13dp"
+    android:layout_height="13dp"
+    android:src="@drawable/bell_icon"
+    app:layout_constraintTop_toBottomOf="@id/title"
+    app:layout_constraintStart_toEndOf="@id/company_name"
+    android:layout_marginTop="3dp"
+    android:layout_marginStart="10dp"
+    app:layout_constraintBottom_toTopOf="@+id/detail"
+
+    />
+
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bangaluru"
+        android:textSize="13sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintStart_toEndOf="@+id/bell_imageview"
+        android:layout_marginStart="3dp"
+        app:layout_constraintBottom_toTopOf="@+id/detail"
+        android:layout_marginTop="3dp"
+        />
+    <ImageView
+        android:id="@+id/calendar_imageview"
+        android:layout_width="13dp"
+        android:layout_height="13dp"
+        android:src="@drawable/calendar"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintStart_toEndOf="@id/location"
+        android:layout_marginTop="3dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/detail"
+
+        />
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="20.10.2022"
+        android:textSize="13sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintStart_toEndOf="@+id/calendar_imageview"
+        app:layout_constraintBottom_toTopOf="@+id/detail"
+        android:layout_marginTop="3dp"
+        android:layout_marginStart="3dp"
+        />
+
+    <TextView
+        android:id="@+id/detail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="freshmart is looking for a highly skilled android developer who is proficient in java/kotlin will we prefered"
+             android:textSize="13sp"
+        android:lines="2"
+        android:maxLines="2"
+        app:layout_constraintTop_toBottomOf="@id/company_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/checkbox"
+        />
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/detail"
+        app:layout_constraintTop_toTopOf="@+id/detail"
+        app:layout_constraintBottom_toBottomOf="@+id/detail"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        android:buttonTint="#58216C"
+        />
+    <TextView
+        android:id="@+id/read_more"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Read more"
+        android:textSize="13sp"
+        android:textColor="#B22B27"
+        app:layout_constraintTop_toBottomOf="@id/detail"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

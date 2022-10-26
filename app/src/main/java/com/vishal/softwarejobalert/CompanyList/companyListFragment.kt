@@ -12,6 +12,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+
+
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vishal.softwarejobalert.companyDetail.CompanyDetailActivity
@@ -23,6 +25,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
+import com.vishal.softwarejobalert.Dialogs.SucessdialogFragment
 import com.vishal.softwarejobalert.Registeration.RegisterationBottomSheetFragment
 import com.vishal.softwarejobalert.utils.Constants
 import kotlinx.coroutines.Dispatchers
@@ -67,7 +70,7 @@ lateinit var readRegisteration:SharedPreferences
         // Inflate the layout for this fragment
 
         binding = FragmentCompanyList2Binding.inflate(layoutInflater)
-        showPopUp()
+
     edit=requireContext().getSharedPreferences("com.softwareAlet", Context.MODE_PRIVATE).edit()
         read =requireContext().getSharedPreferences("com.softwareAlet", Context.MODE_PRIVATE)
         readRegisteration = requireContext().getSharedPreferences("registeration", Context.MODE_PRIVATE)
@@ -117,11 +120,11 @@ var companyName = companyList.get(position).companyName
         readData()
         readSeachText()
 
-        binding.searchEditText.setOnClickListener {
-
-
-
-        }
+//        binding.searchEditText.setOnClickListener {
+//
+//
+//
+//        }
 
         return binding.root
     }
@@ -169,8 +172,8 @@ var companyName = companyList.get(position).companyName
             var msg = "Subscribed"
             if (!task.isSuccessful) {
                 msg = "Subscribe failed"
-                //Toast.makeText(requireContext(),task.exception?.message,Toast.LENGTH_LONG).show()
-
+                Toast.makeText(requireContext(),"Some Problem Occurred",Toast.LENGTH_LONG).show()
+                binding.progressBar.visibility = View.GONE
             }
             else{
 
@@ -185,9 +188,10 @@ var companyName = companyList.get(position).companyName
                    adapter.notifyDataSetChanged()
 
                 binding.progressBar.visibility = View.GONE
+                showPopUp("Successflly Subscribed")
             }
 
-            Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+            //Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
         }
 }
 
@@ -201,6 +205,7 @@ var companyName = companyList.get(position).companyName
                 if (!task.isSuccessful) {
                     msg = "UnSubscribe failed"
                     binding.progressBar.visibility = View.GONE
+                    Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
                 }
                 else{
 
@@ -216,28 +221,29 @@ var companyName = companyList.get(position).companyName
                      edit.apply()
                     adapter.notifyDataSetChanged()
                     binding.progressBar.visibility = View.GONE
-
+                    showPopUp("Successfully UnSubscribed")
                 }
 
-                Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+
             }
 
     }
 
-    fun showPopUp(){
+    fun showPopUp(message:String){
 
 
-        var registerationBottomSheetFragment = RegisterationBottomSheetFragment()
-        registerationBottomSheetFragment.show( childFragmentManager,
-            RegisterationBottomSheetFragment.TAG)
+        var sucessdialogFragment= SucessdialogFragment.newInstance(message)
+//        registerationBottomSheetFragment.show( childFragmentManager,
+//            RegisterationBottomSheetFragment.TAG)
 
-
+              childFragmentManager.beginTransaction().add(binding.fragmentContainer.id,sucessdialogFragment,"hello").commit()
          lifecycleScope.launch(Dispatchers.IO) {
 
-              delay(10000)
+              delay(3000)
              withContext(Dispatchers.Main){
-           registerationBottomSheetFragment.dismiss()
-                 Toast.makeText(requireContext(),"show",Toast.LENGTH_LONG).show()
+//           registerationBottomSheetFragment.dismiss()
+                 childFragmentManager.beginTransaction().remove(sucessdialogFragment).commitAllowingStateLoss()
+//                 Toast.makeText(requireContext(),"show",Toast.LENGTH_LONG).show()
              }
 
          }

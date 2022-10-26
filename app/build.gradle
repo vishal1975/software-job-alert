@@ -11,8 +11,8 @@ android {
         applicationId "com.vishal.softwarejobalert"
         minSdk 21
         targetSdk 32
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -64,5 +64,10 @@ dependencies {
 
 
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
+
+//    retrofit library
+    implementation 'com.google.code.gson:gson:2.8.7'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
 }
