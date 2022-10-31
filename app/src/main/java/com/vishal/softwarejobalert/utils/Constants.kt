@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 object Constants {
-val baseUrl = "https://api.whatjobs.com/api/v1/jobs.json"
+val baseUrl = "https://api.whatjobs.com/api/"
     var retrofit:Retrofit?=null
      fun isNetworkAvailable(context: Context): Boolean {
         val connectivityManager =
@@ -18,7 +18,7 @@ val baseUrl = "https://api.whatjobs.com/api/v1/jobs.json"
     }
 
     fun getWebClient(): Retrofit? {
-        if(retrofit!=null) {
+        if(retrofit==null) {
             retrofit = Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())

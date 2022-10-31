@@ -3,12 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#1C1C1E"
+    android:padding="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
-        android:layout_margin="10dp"
+
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -85,19 +86,21 @@
         app:layout_constraintBottom_toTopOf="@+id/detail"
 
         />
+
     <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="20.10.2022"
-        android:textSize="13sp"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        app:layout_constraintStart_toEndOf="@+id/calendar_imageview"
-        app:layout_constraintBottom_toTopOf="@+id/detail"
-        android:layout_marginTop="3dp"
         android:layout_marginStart="3dp"
-        />
+        android:layout_marginTop="3dp"
+        android:text="20.10.2022"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toTopOf="@+id/detail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/calendar_imageview"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <TextView
         android:id="@+id/detail"
@@ -109,6 +112,7 @@
         android:maxLines="2"
         app:layout_constraintTop_toBottomOf="@id/company_name"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/read_more"
         app:layout_constraintEnd_toStartOf="@+id/checkbox"
         />
     <com.google.android.material.checkbox.MaterialCheckBox
@@ -131,6 +135,7 @@
         android:textColor="#B22B27"
         app:layout_constraintTop_toBottomOf="@id/detail"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
