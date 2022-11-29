@@ -7,9 +7,17 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vishal.softwarejobalert.ModelClasses.JobDetail
 import com.vishal.softwarejobalert.databinding.ActivitySearchByLocationAndSkillBinding
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.net.InetAddress
 import java.net.NetworkInterface
@@ -27,13 +35,14 @@ class searchByLocationAndSkill : AppCompatActivity() {
     var whereList = ArrayList<String>()
     var jobDetailList = ArrayList<JobDetail>()
     lateinit var repository: SearchByLocationAndSkillRepository
+    lateinit var searchByLocationAndSkillViewModel: SearchByLocationAndSkillViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchByLocationAndSkillBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+     searchByLocationAndSkillViewModel = ViewModelProvider(this).get(SearchByLocationAndSkillViewModel::class.java)
         repository = SearchByLocationAndSkillRepository(application)
-        observer()
+       // observer()
         binding.search.setOnClickListener(){
             jobDetailList.clear()
             jobDetailAdapter.notifyDataSetChanged()
@@ -43,10 +52,51 @@ class searchByLocationAndSkill : AppCompatActivity() {
             if(ip.isEmpty()){
                 ip="2409:4050:2e17:f563:f057:f3fa:765f:6983"
             }
+
+            ip="2409:4050:2e17:f563:f057:f3fa:765f:6983"
+             lifecycleScope.launch {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    searchByLocationAndSkillViewModel.getAllJobs("3802",ip,binding.whatSkill.text.toString(),binding.whereSkill.text.toString(),20).collectLatest {
+                        jobDetailAdapter.submitData(it)
+
+                    }
+                }
+            }
+
+
+
+
+//            lifecycleScope.launch {
+//                repeatOnLifecycle(Lifecycle.State.STARTED) {
+//                    jobDetailAdapter.loadStateFlow.collect {
+//                        binding.prependProgress?.isVisible = it.source.prepend is LoadState.Loading
+//                        binding.appendProgress?.isVisible = it.source.append is LoadState.Loading
+//                    }
+//                }
+//            }
+
+
+
+
+
    Toast.makeText(this,"search",Toast.LENGTH_LONG).show()
-            repository.getAllJobs("3802",ip,binding.whatSkill.text.toString(),binding.whereSkill.text.toString(),20,1)
+           // repository.getAllJobs("3802",ip,binding.whatSkill.text.toString(),binding.whereSkill.text.toString(),20,1)
 
         }
+//        jobDetailAdapter.addLoadStateListener {
+//
+//        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                jobDetailAdapter.loadStateFlow.collect {
+                    binding.prependProgress?.isVisible = it.source.prepend is LoadState.Loading
+                    binding.appendProgress?.isVisible = it.source.append is LoadState.Loading
+                }
+            }
+        }
+
+
         whatList.add("android")
         whatList.add("web development  fefjenfjej")
         whereList.add("Banglore")
@@ -154,32 +204,32 @@ class searchByLocationAndSkill : AppCompatActivity() {
 
     }
 
-    fun observer(){
-repository.allJobs.observe(this){
-
-    val json = JSONObject(it)
-
-    val data=json.getJSONArray("data")
-
-    for (i in 0 until data.length()){
-
-        val detail = data.getJSONObject(i)
-        val title = detail.getString("title")
-        val companyName = detail.getString("company")
-        val location =detail.getString("location")
-        val url:String =detail.getString("url")
-        val job_detail:String =detail.getString("snippet")
-        val date =detail.getString("age")
-
-        val job_date: String = parseDateToddMMyyyy(date)
-        Log.v("searchByLocationAndSkil","$title + $job_date")
-        jobDetailList.add(JobDetail(title,companyName,location,job_date,url,job_detail))
-
-    }
-jobDetailAdapter.setList(jobDetailList)
-    jobDetailAdapter.notifyDataSetChanged()
-}
-    }
+//    fun observer(){
+//repository.allJobs.observe(this){
+//
+//    val json = JSONObject(it)
+//
+//    val data=json.getJSONArray("data")
+//
+//    for (i in 0 until data.length()){
+//
+//        val detail = data.getJSONObject(i)
+//        val title = detail.getString("title")
+//        val companyName = detail.getString("company")
+//        val location =detail.getString("location")
+//        val url:String =detail.getString("url")
+//        val job_detail:String =detail.getString("snippet")
+//        val date =detail.getString("age")
+//
+//        val job_date: String = parseDateToddMMyyyy(date)
+//        Log.v("searchByLocationAndSkil","$title + $job_date")
+//        jobDetailList.add(JobDetail(title,companyName,location,job_date,url,job_detail))
+//
+//    }
+//jobDetailAdapter.setList(jobDetailList)
+//    jobDetailAdapter.notifyDataSetChanged()
+//}
+//    }
     fun getAllJobs(){
 
 

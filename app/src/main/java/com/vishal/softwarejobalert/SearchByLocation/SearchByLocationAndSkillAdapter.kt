@@ -6,12 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.vishal.softwarejobalert.CompanyList.ClickCallback
 import com.vishal.softwarejobalert.CompanyList.CompanyModel
+import com.vishal.softwarejobalert.ModelClasses.JobDetail
 import com.vishal.softwarejobalert.R
 
-class SearchByLocationAndSkillAdapter(var context:Context) : RecyclerView.Adapter<LocationAndSkillViewHolder>() {
+class SearchByLocationAndSkillAdapter(var context:Context
+) : RecyclerView.Adapter<LocationAndSkillViewHolder>() {
 
     var callback1: NameClickCallback?=null
 
@@ -45,6 +49,8 @@ class SearchByLocationAndSkillAdapter(var context:Context) : RecyclerView.Adapte
         return nameList.size
     }
 }
+
+
 
 
 class LocationAndSkillViewHolder(private val view : View) : RecyclerView.ViewHolder(view){

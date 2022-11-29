@@ -37,39 +37,42 @@
     />
     <TextView
         android:id="@+id/company_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="FreshMart"
         android:textSize="13sp"
         android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@+id/title"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/bell_imageview"
         app:layout_constraintBottom_toTopOf="@+id/detail"
         android:layout_marginTop="3dp"
         />
-<ImageView
-    android:id="@+id/bell_imageview"
-    android:layout_width="13dp"
-    android:layout_height="13dp"
-    android:src="@drawable/bell_icon"
-    app:layout_constraintTop_toBottomOf="@id/title"
-    app:layout_constraintStart_toEndOf="@id/company_name"
-    android:layout_marginTop="3dp"
-    android:layout_marginStart="10dp"
-    app:layout_constraintBottom_toTopOf="@+id/detail"
 
-    />
+    <ImageView
+        android:id="@+id/bell_imageview"
+        android:layout_width="13dp"
+        android:layout_height="13dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="3dp"
+        android:src="@drawable/bell_icon"
+        app:layout_constraintBottom_toTopOf="@+id/detail"
+        app:layout_constraintEnd_toStartOf="@+id/location"
+        app:layout_constraintStart_toEndOf="@id/company_name"
+
+        app:layout_constraintTop_toBottomOf="@id/title" />
 
 
     <TextView
         android:id="@+id/location"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Bangaluru"
         android:textSize="13sp"
         android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@+id/title"
         app:layout_constraintStart_toEndOf="@+id/bell_imageview"
+       app:layout_constraintEnd_toStartOf="@+id/calendar_imageview"
         android:layout_marginStart="3dp"
         app:layout_constraintBottom_toTopOf="@+id/detail"
         android:layout_marginTop="3dp"
@@ -81,6 +84,7 @@
         android:src="@drawable/calendar"
         app:layout_constraintTop_toBottomOf="@id/title"
         app:layout_constraintStart_toEndOf="@id/location"
+        app:layout_constraintEnd_toStartOf="@+id/date"
         android:layout_marginTop="3dp"
         android:layout_marginStart="10dp"
         app:layout_constraintBottom_toTopOf="@+id/detail"
@@ -91,11 +95,11 @@
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
         android:layout_marginTop="3dp"
         android:text="20.10.2022"
         android:textColor="@color/black"
         android:textSize="13sp"
+        android:layout_marginStart="3dp"
         app:layout_constraintBottom_toTopOf="@+id/detail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

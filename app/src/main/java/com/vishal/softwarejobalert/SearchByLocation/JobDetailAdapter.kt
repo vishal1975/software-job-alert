@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.checkbox.MaterialCheckBox
 import com.vishal.softwarejobalert.ModelClasses.JobDetail
 import com.vishal.softwarejobalert.R
 
-class JobDetailAdapter(var context: Context) : RecyclerView.Adapter<JobDetailViewHolder>() {
+class JobDetailAdapter(var context: Context) : PagingDataAdapter<JobDetail,JobDetailViewHolder>(diffCallback) {
 
     var callback1: NameClickCallback?=null
 
@@ -31,21 +33,35 @@ class JobDetailAdapter(var context: Context) : RecyclerView.Adapter<JobDetailVie
 
     override fun onBindViewHolder(holder: JobDetailViewHolder, position: Int) {
 
-        val jobDetail: JobDetail = nameList.get(position)
+        val jobDetail: JobDetail? = getItem(position)
 
-       holder.title.text = jobDetail.title
-       holder.company_name.text = jobDetail.companyName
-       holder.location.text = jobDetail.location
-       holder.date.text = jobDetail.date
-       holder.detail.text = jobDetail.detail
+       holder.title.text = jobDetail?.title
+       holder.company_name.text = jobDetail?.companyName
+       holder.location.text = jobDetail?.location
+       holder.date.text = jobDetail?.date
+       holder.detail.text = jobDetail?.detail
 
     }
-
-    override fun getItemCount(): Int {
-        return nameList.size
-    }
+//
+//    override fun getItemCount(): Int {
+//        return nameList.size
+//    }
 }
+object diffCallback : DiffUtil.ItemCallback<JobDetail>() {
+    override fun areItemsTheSame(oldItem: JobDetail, newItem: JobDetail): Boolean {
+        if(oldItem.url==newItem.url)
+            return true
+        return false
+    }
 
+    override fun areContentsTheSame(oldItem: JobDetail, newItem: JobDetail): Boolean {
+        if(oldItem.url==newItem.url)
+            return true
+
+        return false
+    }
+
+}
 
 class JobDetailViewHolder(private val view : View) : RecyclerView.ViewHolder(view){
 

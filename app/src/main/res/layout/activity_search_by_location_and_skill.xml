@@ -86,13 +86,33 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/what_skill" />
 
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/prepend_progress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/general_title" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/job_detail_recyclerview"
             android:layout_width="match_parent"
 
             android:layout_height="0dp"
             android:translationZ="2dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/general_title" />
+            app:layout_constraintBottom_toTopOf="@+id/append_progress"
+            app:layout_constraintTop_toBottomOf="@+id/prepend_progress" />
 
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/append_progress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/job_detail_recyclerview"
+            app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

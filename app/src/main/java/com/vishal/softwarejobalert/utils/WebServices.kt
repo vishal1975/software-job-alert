@@ -8,7 +8,7 @@ import retrofit2.http.Query
 interface WebServices {
 
     @GET("v1/jobs.json")
-    fun getAllJobs(
+   suspend fun getAllJobs(
 @Query("publisher") publisher:String,
 @Query("user_ip") user_ip:String,
 @Query("user_agent") user_agent:String,
@@ -16,5 +16,5 @@ interface WebServices {
 @Query("location") location:String,
 @Query("limit") limit:Int,
 @Query("page") page :Int
-    ): Call<ResponseBody>
+    ): ResponseBody
 }
