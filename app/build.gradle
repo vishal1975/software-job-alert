@@ -1,7 +1,10 @@
 plugins {
+
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -15,6 +18,11 @@ android {
         versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+
+    kapt {
+        correctErrorTypes = true
     }
 
     buildTypes {
@@ -75,5 +83,11 @@ dependencies {
 
     implementation "androidx.paging:paging-runtime:$paging_version"
 
+    // dagger hilt dependency
+    implementation("com.google.dagger:hilt-android:2.44")
+    kapt("com.google.dagger:hilt-android-compiler:2.44")
+
+    // lottie library
+    implementation "com.airbnb.android:lottie:4.1.0"
 
 }
