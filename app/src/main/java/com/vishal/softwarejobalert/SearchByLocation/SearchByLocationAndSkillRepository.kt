@@ -15,8 +15,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.http.Query
+import javax.inject.Inject
 
-class SearchByLocationAndSkillRepository(var application: Application) {
+class SearchByLocationAndSkillRepository @Inject constructor() {
 
 
 //    var allJobs = MutableLiveData<String>()

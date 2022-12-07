@@ -8,14 +8,13 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
+import androidx.lifecycle.*
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.vishal.softwarejobalert.BaseFragment
 import com.vishal.softwarejobalert.ModelClasses.JobDetail
 import com.vishal.softwarejobalert.databinding.ActivitySearchByLocationAndSkillBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.json.JSONObject
@@ -25,9 +24,9 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-
-class searchByLocationAndSkill : AppCompatActivity() {
-    lateinit var binding:ActivitySearchByLocationAndSkillBinding
+@AndroidEntryPoint
+class searchByLocationAndSkill :BaseFragment<ActivitySearchByLocationAndSkillBinding,SearchByLocationAndSkillViewModel>() {
+   // lateinit var binding:ActivitySearchByLocationAndSkillBinding
     lateinit var adapter1: SearchByLocationAndSkillAdapter
     lateinit var adapter2: SearchByLocationAndSkillAdapter
     lateinit var jobDetailAdapter: JobDetailAdapter
@@ -36,12 +35,12 @@ class searchByLocationAndSkill : AppCompatActivity() {
     var jobDetailList = ArrayList<JobDetail>()
     lateinit var repository: SearchByLocationAndSkillRepository
     lateinit var searchByLocationAndSkillViewModel: SearchByLocationAndSkillViewModel
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivitySearchByLocationAndSkillBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-     searchByLocationAndSkillViewModel = ViewModelProvider(this).get(SearchByLocationAndSkillViewModel::class.java)
-        repository = SearchByLocationAndSkillRepository(application)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+      //  binding = ActivitySearchByLocationAndSkillBinding.inflate(layoutInflater)
+       // setContentView(binding.root)
+     //searchByLocationAndSkillViewModel = ViewModelProvider(this).get(SearchByLocationAndSkillViewModel::class.java)
+    //    repository = SearchByLocationAndSkillRepository(application)
        // observer()
         binding.search.setOnClickListener(){
             jobDetailList.clear()
@@ -55,12 +54,12 @@ class searchByLocationAndSkill : AppCompatActivity() {
 
             ip="2409:4050:2e17:f563:f057:f3fa:765f:6983"
              lifecycleScope.launch {
-                repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    searchByLocationAndSkillViewModel.getAllJobs("3802",ip,binding.whatSkill.text.toString(),binding.whereSkill.text.toString(),20).collectLatest {
+
+                    searchByLocationAndSkillViewModel.getAllJobs("3802",ip,binding.whatSkill.text.toString(),binding.whereSkill.text.toString(),20).flowWithLifecycle(viewLifecycleOwner.lifecycle,Lifecycle.State.CREATED).collect {
                         jobDetailAdapter.submitData(it)
 
                     }
-                }
+
             }
 
 
@@ -79,7 +78,7 @@ class searchByLocationAndSkill : AppCompatActivity() {
 
 
 
-   Toast.makeText(this,"search",Toast.LENGTH_LONG).show()
+   Toast.makeText(requireContext(),"search",Toast.LENGTH_LONG).show()
            // repository.getAllJobs("3802",ip,binding.whatSkill.text.toString(),binding.whereSkill.text.toString(),20,1)
 
         }
@@ -175,7 +174,7 @@ class searchByLocationAndSkill : AppCompatActivity() {
     }
 
     private fun setRecyclerview() {
-        adapter1 = SearchByLocationAndSkillAdapter(this)
+        adapter1 = SearchByLocationAndSkillAdapter(requireContext())
        // adapter1.setList(whatList)
         adapter1.setCallback(object :NameClickCallback{
             override fun nameClick(name: String) {
@@ -185,7 +184,7 @@ class searchByLocationAndSkill : AppCompatActivity() {
         })
 
 
-        adapter2 = SearchByLocationAndSkillAdapter(this)
+        adapter2 = SearchByLocationAndSkillAdapter(requireContext())
        // adapter2.setList(whereList)
         adapter2.setCallback(object :NameClickCallback{
             override fun nameClick(name: String) {
@@ -193,13 +192,13 @@ class searchByLocationAndSkill : AppCompatActivity() {
             }
 
         })
-        jobDetailAdapter = JobDetailAdapter(this)
-        binding.jobDetailRecyclerview.layoutManager=LinearLayoutManager(this)
+        jobDetailAdapter = JobDetailAdapter(requireContext())
+        binding.jobDetailRecyclerview.layoutManager=LinearLayoutManager(requireContext())
         binding.jobDetailRecyclerview.adapter = jobDetailAdapter
-        binding.whatRecyclerview.layoutManager=LinearLayoutManager(this)
+        binding.whatRecyclerview.layoutManager=LinearLayoutManager(requireContext())
         binding.whatRecyclerview.adapter=adapter1
 
-        binding.whereRecyclerview.layoutManager=LinearLayoutManager(this)
+        binding.whereRecyclerview.layoutManager=LinearLayoutManager(requireContext())
         binding.whereRecyclerview.adapter=adapter2
 
     }

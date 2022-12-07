@@ -3,19 +3,27 @@ package com.vishal.softwarejobalert.Home
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import com.vishal.softwarejobalert.BaseFragment
 import com.vishal.softwarejobalert.R
 import com.vishal.softwarejobalert.SearchByLocation.searchByLocationAndSkill
 import com.vishal.softwarejobalert.databinding.ActivityHomeScreenBinding
+import com.vishal.softwarejobalert.superNavigate
 
-class HomeScreen : AppCompatActivity() {
-    lateinit var binding:ActivityHomeScreenBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityHomeScreenBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+class HomeScreen : BaseFragment<ActivityHomeScreenBinding,HomeScreenViewModel>() {
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+//        binding = ActivityHomeScreenBinding.inflate(layoutInflater)
+//        setContentView(binding.root)
+
         binding.locationConstraintLayout.setOnClickListener(){
-            val intent = Intent(this,searchByLocationAndSkill::class.java)
-            startActivity(intent)
+//            val intent = Intent(requireContext(),searchByLocationAndSkill::class.java)
+//            startActivity(intent)
+
+            val action =HomeScreenDirections.actionHomeScreenToSearchByLocationAndSkill()
+            superNavigate(action)
         }
+
     }
 }

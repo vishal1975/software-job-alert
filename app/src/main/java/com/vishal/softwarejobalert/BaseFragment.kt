@@ -12,7 +12,7 @@ import androidx.viewbinding.ViewBinding
 import java.lang.reflect.ParameterizedType
 import javax.inject.Inject
 
-class BaseFragment <VB : ViewBinding, VM : ViewModel> : Fragment() {
+open class BaseFragment <VB : ViewBinding, VM : ViewModel> : Fragment() {
 
     protected lateinit var binding: VB private set
     protected lateinit var viewModel: VM private set
