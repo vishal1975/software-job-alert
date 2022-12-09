@@ -8,8 +8,11 @@ import com.vishal.softwarejobalert.BaseFragment
 import com.vishal.softwarejobalert.R
 import com.vishal.softwarejobalert.SearchByLocation.searchByLocationAndSkill
 import com.vishal.softwarejobalert.databinding.ActivityHomeScreenBinding
+import com.vishal.softwarejobalert.singleClickListener
 import com.vishal.softwarejobalert.superNavigate
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeScreen : BaseFragment<ActivityHomeScreenBinding,HomeScreenViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -17,7 +20,7 @@ class HomeScreen : BaseFragment<ActivityHomeScreenBinding,HomeScreenViewModel>()
 //        binding = ActivityHomeScreenBinding.inflate(layoutInflater)
 //        setContentView(binding.root)
 
-        binding.locationConstraintLayout.setOnClickListener(){
+        binding.locationConstraintLayout.singleClickListener {
 //            val intent = Intent(requireContext(),searchByLocationAndSkill::class.java)
 //            startActivity(intent)
 

@@ -39,7 +39,7 @@ class JobDetailAdapter(var context: Context) : PagingDataAdapter<JobDetail,JobDe
        holder.company_name.text = jobDetail?.companyName
        holder.location.text = jobDetail?.location
        holder.date.text = jobDetail?.date
-       holder.detail.text = jobDetail?.detail
+       holder.detail.text = jobDetail?.detail?.replace("\\n"," ")
 
     }
 //

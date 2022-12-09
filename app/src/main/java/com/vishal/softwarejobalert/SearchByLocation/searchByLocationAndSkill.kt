@@ -33,8 +33,8 @@ class searchByLocationAndSkill :BaseFragment<ActivitySearchByLocationAndSkillBin
     var whatList=ArrayList<String>()
     var whereList = ArrayList<String>()
     var jobDetailList = ArrayList<JobDetail>()
-    lateinit var repository: SearchByLocationAndSkillRepository
-    lateinit var searchByLocationAndSkillViewModel: SearchByLocationAndSkillViewModel
+   // lateinit var repository: SearchByLocationAndSkillRepository
+  //  lateinit var searchByLocationAndSkillViewModel: SearchByLocationAndSkillViewModel
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
       //  binding = ActivitySearchByLocationAndSkillBinding.inflate(layoutInflater)
@@ -42,6 +42,7 @@ class searchByLocationAndSkill :BaseFragment<ActivitySearchByLocationAndSkillBin
      //searchByLocationAndSkillViewModel = ViewModelProvider(this).get(SearchByLocationAndSkillViewModel::class.java)
     //    repository = SearchByLocationAndSkillRepository(application)
        // observer()
+        setRecyclerview()
         binding.search.setOnClickListener(){
             jobDetailList.clear()
             jobDetailAdapter.notifyDataSetChanged()
@@ -55,11 +56,25 @@ class searchByLocationAndSkill :BaseFragment<ActivitySearchByLocationAndSkillBin
             ip="2409:4050:2e17:f563:f057:f3fa:765f:6983"
              lifecycleScope.launch {
 
-                    searchByLocationAndSkillViewModel.getAllJobs("3802",ip,binding.whatSkill.text.toString(),binding.whereSkill.text.toString(),20).flowWithLifecycle(viewLifecycleOwner.lifecycle,Lifecycle.State.CREATED).collect {
-                        jobDetailAdapter.submitData(it)
+                 try {
 
-                    }
 
+                     viewModel.getAllJobs(
+                         "3802",
+                         ip,
+                         binding.whatSkill.text.toString(),
+                         binding.whereSkill.text.toString(),
+                         20
+                     ).flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.CREATED)
+                         .collect {
+                             jobDetailAdapter.submitData(it)
+
+                         }
+
+                 }catch (e:Exception){
+                     e.printStackTrace()
+                     Log.d("pagging data",e.message.toString())
+                 }
             }
 
 
@@ -101,7 +116,7 @@ class searchByLocationAndSkill :BaseFragment<ActivitySearchByLocationAndSkillBin
         whereList.add("Banglore")
         whereList.add("Noida")
         whereList.add("chennannnnnnjjnjnjjjnjjjnjj")
-        setRecyclerview()
+//        setRecyclerview()
         setEditTextListner()
 
     }
