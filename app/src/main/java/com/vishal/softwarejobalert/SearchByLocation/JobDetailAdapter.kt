@@ -42,10 +42,7 @@ class JobDetailAdapter(var context: Context) : PagingDataAdapter<JobDetail,JobDe
        holder.detail.text = jobDetail?.detail?.replace("\\n"," ")
 
     }
-//
-//    override fun getItemCount(): Int {
-//        return nameList.size
-//    }
+
 }
 object diffCallback : DiffUtil.ItemCallback<JobDetail>() {
     override fun areItemsTheSame(oldItem: JobDetail, newItem: JobDetail): Boolean {

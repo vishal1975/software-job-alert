@@ -37,7 +37,11 @@ class JobDetailPagingSource(val publisher:String,
             val services = webClient?.create(WebServices::class.java)
            val response= services?.getAllJobs(publisher,user_ip,"Android",keyword,location,limit,position)
             val data =getDataFromResponse(response?.string())
-            val total = data.first
+            var total = data.first
+            if(data.second.size==0){
+                total=position
+            }
+
             Log.v("position","$position , $total")
            return LoadResult.Page(
                 data = data.second,
