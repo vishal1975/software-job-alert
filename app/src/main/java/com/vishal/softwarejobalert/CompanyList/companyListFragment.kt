@@ -231,7 +231,6 @@ var companyName = companyList.get(position).companyName
 
     fun showPopUp(message:String){
 
-
         var sucessdialogFragment= SucessdialogFragment.newInstance(message)
 //        registerationBottomSheetFragment.show( childFragmentManager,
 //            RegisterationBottomSheetFragment.TAG)

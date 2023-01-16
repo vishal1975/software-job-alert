@@ -81,7 +81,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/location_constraint_layout"
+        app:layout_constraintBottom_toTopOf="@+id/location_cardview"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
 
         android:layout_marginStart="10dp"
@@ -131,10 +131,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="5dp"
+
 
            android:layout_gravity="center"
-
+              android:gravity="center"
             android:padding="3dp"
             android:text="Subscribe"
             android:textColor="@color/white" />
@@ -299,20 +299,37 @@ app:layout_constraintBottom_toBottomOf="parent"
                         android:textColor="#00FF19"
                         android:layout_gravity="center"
                         />
-                    <TextView
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/machine_learning_cardview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:cardBackgroundColor="#4D7144"
+                        app:cardCornerRadius="10dp"
+                        app:strokeColor="#B22B27"
+                        app:strokeWidth="1dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_marginTop="5dp"
+                        >
 
-                        android:background="@drawable/ic_red_background"
+
+
+
+                    <TextView
+                        android:id="@+id/mchine_learning_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                       android:padding="5dp"
+
                         android:gravity="center"
                         android:layout_gravity="center"
-                        android:paddingTop="3dp"
-                        android:paddingBottom="3dp"
                         android:textSize="16sp"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="15dp"
+
                         android:text="Subscribe"
                         android:textColor="#B22B27" />
+                    </com.google.android.material.card.MaterialCardView>
                 </LinearLayout>
 
                 <LinearLayout
@@ -350,21 +367,40 @@ app:layout_constraintBottom_toBottomOf="parent"
                         android:textColor="#AC9FB8"
                         android:layout_gravity="center"
                         />
-                    <TextView
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/data_science_cardview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
-                        android:background="@drawable/ic_red_background"
-                        android:gravity="center"
                         android:layout_gravity="center"
-                        android:paddingTop="3dp"
-                        android:paddingBottom="3dp"
-                        android:textSize="16sp"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="15dp"
-                        android:text="Subscribe"
-                        android:textColor="#B22B27" />
+                        app:cardBackgroundColor="#58216C"
+                        app:cardCornerRadius="10dp"
+                        app:strokeColor="#B22B27"
+                        app:strokeWidth="1dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_marginTop="5dp"
+                        >
+
+
+
+
+                        <TextView
+                            android:id="@+id/data_science_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:textSize="16sp"
+
+                            android:text="Subscribe"
+                            android:textColor="#B22B27" />
+                    </com.google.android.material.card.MaterialCardView>
+
                 </LinearLayout>
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -409,20 +445,37 @@ app:layout_constraintBottom_toBottomOf="parent"
                         android:textColor="#54202D"
                         android:layout_gravity="center"
                         />
-                    <TextView
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cloud_computing_cardview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
-                        android:background="@drawable/ic_red_background"
-                        android:gravity="center"
                         android:layout_gravity="center"
-                        android:paddingTop="3dp"
-                        android:paddingBottom="3dp"
-                        android:textSize="16sp"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="15dp"
-                        android:text="Subscribe"
-                        android:textColor="#B22B27" />
+                        app:cardBackgroundColor="#C63C5F"
+                        app:cardCornerRadius="10dp"
+                        app:strokeColor="#B22B27"
+                        app:strokeWidth="1dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_marginTop="5dp"
+                        >
+
+
+
+
+                        <TextView
+                            android:id="@+id/cloud_computing_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:textSize="16sp"
+
+                            android:text="Subscribe"
+                            android:textColor="#B22B27" />
+                    </com.google.android.material.card.MaterialCardView>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -453,21 +506,37 @@ app:layout_constraintBottom_toBottomOf="parent"
                         />
 
 
-                    <TextView
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/block_chain_cardview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
-                        android:background="@drawable/ic_red_background"
-                        android:gravity="center"
                         android:layout_gravity="center"
-                        android:paddingTop="3dp"
-                        android:paddingBottom="3dp"
-                        android:textSize="16sp"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="15dp"
-                        android:layout_marginTop="10dp"
-                        android:text="Subscribe"
-                        android:textColor="#B22B27" />
+                        app:cardBackgroundColor="#EFD033"
+                        app:cardCornerRadius="10dp"
+                        app:strokeColor="#B22B27"
+                        app:strokeWidth="1dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_marginTop="5dp"
+                        >
+
+
+
+
+                        <TextView
+                            android:id="@+id/blockchain_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:textSize="16sp"
+
+                            android:text="Subscribe"
+                            android:textColor="#B22B27" />
+                    </com.google.android.material.card.MaterialCardView>
+
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -513,20 +582,37 @@ app:layout_constraintBottom_toBottomOf="parent"
                         android:textColor="#A8DADC"
                         android:layout_gravity="center"
                         />
-                    <TextView
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/android_development_cardview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
-                        android:background="@drawable/ic_red_background"
-                        android:gravity="center"
                         android:layout_gravity="center"
-                        android:paddingTop="3dp"
-                        android:paddingBottom="3dp"
-                        android:textSize="16sp"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="15dp"
-                        android:text="Subscribe"
-                        android:textColor="#B22B27" />
+                        app:cardBackgroundColor="#219EBC"
+                        app:cardCornerRadius="10dp"
+                        app:strokeColor="#B22B27"
+                        app:strokeWidth="1dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_marginTop="5dp"
+                        >
+
+
+
+
+                        <TextView
+                            android:id="@+id/android_development_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:textSize="16sp"
+
+                            android:text="Subscribe"
+                            android:textColor="#B22B27" />
+                    </com.google.android.material.card.MaterialCardView>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -563,24 +649,52 @@ app:layout_constraintBottom_toBottomOf="parent"
                         android:textColor="#54202D"
                         android:layout_gravity="center"
                         />
-                    <TextView
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/web_development_cardview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
-                        android:background="@drawable/ic_red_background"
-                        android:gravity="center"
                         android:layout_gravity="center"
-                        android:paddingTop="3dp"
-                        android:paddingBottom="3dp"
-                        android:textSize="16sp"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="15dp"
-                        android:text="Subscribe"
-                        android:textColor="#B22B27" />
+                        app:cardBackgroundColor="#E3D5CA"
+                        app:cardCornerRadius="10dp"
+                        app:strokeColor="#B22B27"
+                        app:strokeWidth="1dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_marginTop="5dp"
+                        >
+
+
+
+
+                        <TextView
+                            android:id="@+id/web_development_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:textSize="16sp"
+
+                            android:text="Subscribe"
+                            android:textColor="#B22B27" />
+                    </com.google.android.material.card.MaterialCardView>
+
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </LinearLayout>
     </ScrollView>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"
+      />
 </androidx.constraintlayout.widget.ConstraintLayout>

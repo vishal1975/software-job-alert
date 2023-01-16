@@ -28,7 +28,7 @@ class RegisterationBottomSheetFragment : BottomSheetDialogFragment() {
     ): View{
 
         binding = RegisterationLayoutBinding.inflate(inflater)
-        edit=requireContext().getSharedPreferences("registeration", Context.MODE_PRIVATE).edit()
+        edit=requireContext().getSharedPreferences(Constants.REGISTERATION, Context.MODE_PRIVATE).edit()
         setOnClick()
        return binding.root
     }
@@ -69,7 +69,7 @@ if(Constants.isNetworkAvailable(requireContext())) {
 
 
         Toast.makeText(requireContext(), "registered", Toast.LENGTH_LONG).show()
-        edit.putBoolean("registeration", true)
+        edit.putBoolean(Constants.REGISTERATION, true)
         edit.apply()
 dismiss()
 
