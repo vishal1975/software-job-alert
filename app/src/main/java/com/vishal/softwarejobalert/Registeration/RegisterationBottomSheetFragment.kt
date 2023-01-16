@@ -19,6 +19,7 @@ import com.vishal.softwarejobalert.utils.Constants
 class RegisterationBottomSheetFragment : BottomSheetDialogFragment() {
 
     lateinit var binding: RegisterationLayoutBinding
+    lateinit var userRegisterationCallback: UserRegisterationCallback
    var database: DatabaseReference =Firebase.database.reference
     lateinit var edit: SharedPreferences.Editor
     override fun onCreateView(
@@ -72,7 +73,7 @@ if(Constants.isNetworkAvailable(requireContext())) {
         edit.putBoolean(Constants.REGISTERATION, true)
         edit.apply()
 dismiss()
-
+   userRegisterationCallback.registered()
         //binding.error.visibility = View.VISIBLE
 
     }
@@ -87,9 +88,15 @@ dismiss()
         }
 
     }
+    fun setRegisterationCallback(userRegisterationCallback: UserRegisterationCallback){
+        this.userRegisterationCallback = userRegisterationCallback
+    }
 
 
     companion object {
         const val TAG = "REGISTERBOTTOMFRAGMENT"
     }
+}
+interface UserRegisterationCallback{
+    fun registered()
 }

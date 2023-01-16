@@ -13,6 +13,7 @@ import com.google.firebase.messaging.ktx.messaging
 import com.vishal.softwarejobalert.BaseFragment
 import com.vishal.softwarejobalert.R
 import com.vishal.softwarejobalert.Registeration.RegisterationBottomSheetFragment
+import com.vishal.softwarejobalert.Registeration.UserRegisterationCallback
 import com.vishal.softwarejobalert.SearchByLocation.searchByLocationAndSkill
 import com.vishal.softwarejobalert.databinding.ActivityHomeScreenBinding
 import com.vishal.softwarejobalert.singleClickListener
@@ -39,7 +40,7 @@ class HomeScreen : BaseFragment<ActivityHomeScreenBinding,HomeScreenViewModel>()
         readSubscription = requireContext().getSharedPreferences(Constants.SUBSCRIPTION, Context.MODE_PRIVATE)
 
 
-        if(!readRegisteration.getBoolean("registeration",false)){
+        if(!readRegisteration.getBoolean(Constants.REGISTERATION,false)){
 
             binding.registerTextview.text = "Register"
         }
@@ -101,10 +102,16 @@ class HomeScreen : BaseFragment<ActivityHomeScreenBinding,HomeScreenViewModel>()
         }
 
         binding.registerCardview.singleClickListener {
-           if(!readRegisteration.getBoolean("registeration",false)){
+           if(!readRegisteration.getBoolean(Constants.REGISTERATION,false)){
 
 
                var registerationBottomSheetFragment = RegisterationBottomSheetFragment()
+               registerationBottomSheetFragment.setRegisterationCallback(object:UserRegisterationCallback{
+                   override fun registered() {
+                       binding.registerTextview.text = "Registered"
+                   }
+
+               })
                registerationBottomSheetFragment.show( childFragmentManager,
                    RegisterationBottomSheetFragment.TAG)
 
@@ -118,7 +125,11 @@ class HomeScreen : BaseFragment<ActivityHomeScreenBinding,HomeScreenViewModel>()
         }
         binding.machineLearningCardview.singleClickListener {
 
-            if(readSubscription.getBoolean(Constants.MACHINE_LEARNING,false)){
+            if(!readRegisteration.getBoolean(Constants.REGISTERATION,false)){
+                Toast.makeText(requireContext(),"Please Register First",Toast.LENGTH_LONG).show()
+            }
+
+           else if(!readSubscription.getBoolean(Constants.MACHINE_LEARNING,false)){
 
                 subscribeToTopic(Constants.MACHINE_LEARNING,binding.mchineLearningText)
         }
@@ -128,8 +139,10 @@ class HomeScreen : BaseFragment<ActivityHomeScreenBinding,HomeScreenViewModel>()
 
         }
         binding.dataScienceCardview.singleClickListener{
-
-            if(readSubscription.getBoolean(Constants.DATA_SCIENCE,false)){
+            if(!readRegisteration.getBoolean(Constants.REGISTERATION,false)){
+                Toast.makeText(requireContext(),"Please Register First",Toast.LENGTH_LONG).show()
+            }
+            else if(!readSubscription.getBoolean(Constants.DATA_SCIENCE,false)){
 
                 subscribeToTopic(Constants.DATA_SCIENCE,binding.dataScienceText)
             }
@@ -140,8 +153,10 @@ class HomeScreen : BaseFragment<ActivityHomeScreenBinding,HomeScreenViewModel>()
         }
         binding.cloudComputingCardview.singleClickListener{
 
-
-            if(readSubscription.getBoolean(Constants.CLOUD_COMPUTING,false)){
+            if(!readRegisteration.getBoolean(Constants.REGISTERATION,false)){
+                Toast.makeText(requireContext(),"Please Register First",Toast.LENGTH_LONG).show()
+            }
+           else if(!readSubscription.getBoolean(Constants.CLOUD_COMPUTING,false)){
 
                 subscribeToTopic(Constants.CLOUD_COMPUTING,binding.cloudComputingText)
             }
@@ -154,8 +169,10 @@ class HomeScreen : BaseFragment<ActivityHomeScreenBinding,HomeScreenViewModel>()
         binding.blockChainCardview.singleClickListener {
 
 
-
-            if(readSubscription.getBoolean(Constants.BLOCKCHAIN,false)){
+            if(!readRegisteration.getBoolean(Constants.REGISTERATION,false)){
+                Toast.makeText(requireContext(),"Please Register First",Toast.LENGTH_LONG).show()
+            }
+           else if(!readSubscription.getBoolean(Constants.BLOCKCHAIN,false)){
 
                 subscribeToTopic(Constants.BLOCKCHAIN,binding.blockchainText)
             }
@@ -168,7 +185,11 @@ class HomeScreen : BaseFragment<ActivityHomeScreenBinding,HomeScreenViewModel>()
         }
         binding.androidDevelopmentCardview.singleClickListener{
 
-            if(readSubscription.getBoolean(Constants.ANDROID_DEVELOPMENT,false)){
+            if(!readRegisteration.getBoolean(Constants.REGISTERATION,false)){
+                Toast.makeText(requireContext(),"Please Register First",Toast.LENGTH_LONG).show()
+            }
+
+            else if(!readSubscription.getBoolean(Constants.ANDROID_DEVELOPMENT,false)){
 
                 subscribeToTopic(Constants.ANDROID_DEVELOPMENT,binding.androidDevelopmentText)
             }
@@ -180,8 +201,10 @@ class HomeScreen : BaseFragment<ActivityHomeScreenBinding,HomeScreenViewModel>()
 
         binding.webDevelopmentCardview.singleClickListener {
 
-
-            if(readSubscription.getBoolean(Constants.WEB_DEVELOPMENT,false)){
+            if(!readRegisteration.getBoolean(Constants.REGISTERATION,false)){
+                Toast.makeText(requireContext(),"Please Register First",Toast.LENGTH_LONG).show()
+            }
+            else if(!readSubscription.getBoolean(Constants.WEB_DEVELOPMENT,false)){
 
                 subscribeToTopic(Constants.WEB_DEVELOPMENT,binding.webDevelopmentText)
             }
@@ -211,6 +234,8 @@ class HomeScreen : BaseFragment<ActivityHomeScreenBinding,HomeScreenViewModel>()
 
                     binding.progressBar.visibility = View.GONE
                     view.text = "Subscribe"
+                    editSubscription.putBoolean(topic,false)
+                    editSubscription.apply()
 //                    var companyName = companyList.get(position).companyName
 //                    edit.putString(companyName,"0")
 //                    edit.apply()
@@ -238,6 +263,8 @@ class HomeScreen : BaseFragment<ActivityHomeScreenBinding,HomeScreenViewModel>()
                 else{
 
                     binding.progressBar.visibility = View.GONE
+                    editSubscription.putBoolean(topic,true)
+                    editSubscription.apply()
                     view.text="Subscribed"
 
 //                database.get().addOnCompleteListener {
