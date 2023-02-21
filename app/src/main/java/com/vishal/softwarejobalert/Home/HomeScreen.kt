@@ -261,7 +261,7 @@ class HomeScreen : BaseFragment<ActivityHomeScreenBinding,HomeScreenViewModel>()
                     binding.progressBar.visibility = View.GONE
                 }
                 else{
-
+                    Toast.makeText(requireContext(),"Successful",Toast.LENGTH_LONG).show()
                     binding.progressBar.visibility = View.GONE
                     editSubscription.putBoolean(topic,true)
                     editSubscription.apply()
