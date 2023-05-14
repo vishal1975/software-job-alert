@@ -5,9 +5,12 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
 import com.vishal.softwarejobalert.BaseFragment
@@ -28,7 +31,19 @@ class HomeScreen : BaseFragment<ActivityHomeScreenBinding,HomeScreenViewModel>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//       var actionBarDrawerToggle =  ActionBarDrawerToggle(requireActivity(), binding.drawerLayout, R.string.nav_open, R.string.nav_close)
+//        binding.drawerLayout.addDrawerListener(actionBarDrawerToggle);
+//        actionBarDrawerToggle.syncState();
 
+        binding.mainContentLayout.hamburger.setOnClickListener {
+
+           if(binding.drawerLayout.isDrawerOpen(Gravity.LEFT)){
+               binding.drawerLayout.closeDrawers()
+           }
+            else {
+               binding.drawerLayout.openDrawer(Gravity.LEFT)
+           }
+        }
         setupViews()
         setupListner()
 
@@ -41,66 +56,66 @@ class HomeScreen : BaseFragment<ActivityHomeScreenBinding,HomeScreenViewModel>()
 
         if(!readRegisteration.getBoolean("registeration",false)){
 
-            binding.registerTextview.text = "Register"
+            binding.mainContentLayout.registerTextview.text = "Register"
         }
         else{
-            binding.registerTextview.text = "Registered"
+            binding.mainContentLayout.registerTextview.text = "Registered"
         }
 
         if(readSubscription.getBoolean(Constants.MACHINE_LEARNING,false)){
-           binding.mchineLearningText.text="Subscribed"
+           binding.mainContentLayout.mchineLearningText.text="Subscribed"
         }
         else{
-            binding.mchineLearningText.text="Subscribe"
+            binding.mainContentLayout.mchineLearningText.text="Subscribe"
         }
         if(readSubscription.getBoolean(Constants.DATA_SCIENCE,false)){
 
-            binding.dataScienceText.text="Subscribed"
+            binding.mainContentLayout.dataScienceText.text="Subscribed"
         }
         else{
-            binding.dataScienceText.text="Subscribe"
+            binding.mainContentLayout.dataScienceText.text="Subscribe"
         }
         if(readSubscription.getBoolean(Constants.CLOUD_COMPUTING,false)){
 
-            binding.cloudComputingText.text="Subscribed"
+            binding.mainContentLayout.cloudComputingText.text="Subscribed"
         }
         else{
-            binding.cloudComputingText.text="Subscribe"
+            binding.mainContentLayout.cloudComputingText.text="Subscribe"
         }
         if(readSubscription.getBoolean(Constants.BLOCKCHAIN,false)){
 
-            binding.blockchainText.text = "Subscribed"
+            binding.mainContentLayout.blockchainText.text = "Subscribed"
         }
         else{
-            binding.blockchainText.text = "Subscribe"
+            binding.mainContentLayout.blockchainText.text = "Subscribe"
         }
         if(readSubscription.getBoolean(Constants.ANDROID_DEVELOPMENT,false)){
 
-            binding.androidDevelopmentText.text = "Subscribed"
+            binding.mainContentLayout.androidDevelopmentText.text = "Subscribed"
         }
         else{
-            binding.androidDevelopmentText.text = "Subscribe"
+            binding.mainContentLayout.androidDevelopmentText.text = "Subscribe"
         }
         if(readSubscription.getBoolean(Constants.WEB_DEVELOPMENT,false)){
 
-            binding.webDevelopmentText.text = "Subscribed"
+            binding.mainContentLayout.webDevelopmentText.text = "Subscribed"
 
         }
         else{
-            binding.webDevelopmentText.text = "Subscribe"
+            binding.mainContentLayout.webDevelopmentText.text = "Subscribe"
         }
 
     }
 
     private fun setupListner(){
-        binding.locationConstraintLayout.singleClickListener {
+        binding.mainContentLayout.locationConstraintLayout.singleClickListener {
 
 
             val action =HomeScreenDirections.actionHomeScreenToSearchByLocationAndSkill()
             superNavigate(action)
         }
 
-        binding.registerCardview.singleClickListener {
+        binding.mainContentLayout.registerCardview.singleClickListener {
            if(!readRegisteration.getBoolean("registeration",false)){
 
 
@@ -116,77 +131,77 @@ class HomeScreen : BaseFragment<ActivityHomeScreenBinding,HomeScreenViewModel>()
 
 
         }
-        binding.machineLearningCardview.singleClickListener {
+        binding.mainContentLayout.machineLearningCardview.singleClickListener {
 
             if(readSubscription.getBoolean(Constants.MACHINE_LEARNING,false)){
 
-                subscribeToTopic(Constants.MACHINE_LEARNING,binding.mchineLearningText)
+                subscribeToTopic(Constants.MACHINE_LEARNING,binding.mainContentLayout.mchineLearningText)
         }
             else{
-                unsubscribeToTopic(Constants.MACHINE_LEARNING,binding.mchineLearningText)
+                unsubscribeToTopic(Constants.MACHINE_LEARNING,binding.mainContentLayout.mchineLearningText)
             }
 
         }
-        binding.dataScienceCardview.singleClickListener{
+        binding.mainContentLayout.dataScienceCardview.singleClickListener{
 
             if(readSubscription.getBoolean(Constants.DATA_SCIENCE,false)){
 
-                subscribeToTopic(Constants.DATA_SCIENCE,binding.dataScienceText)
+                subscribeToTopic(Constants.DATA_SCIENCE,binding.mainContentLayout.dataScienceText)
             }
             else{
-                unsubscribeToTopic(Constants.DATA_SCIENCE,binding.dataScienceText)
+                unsubscribeToTopic(Constants.DATA_SCIENCE,binding.mainContentLayout.dataScienceText)
             }
 
         }
-        binding.cloudComputingCardview.singleClickListener{
+        binding.mainContentLayout.cloudComputingCardview.singleClickListener{
 
 
             if(readSubscription.getBoolean(Constants.CLOUD_COMPUTING,false)){
 
-                subscribeToTopic(Constants.CLOUD_COMPUTING,binding.cloudComputingText)
+                subscribeToTopic(Constants.CLOUD_COMPUTING,binding.mainContentLayout.cloudComputingText)
             }
             else{
-                unsubscribeToTopic(Constants.CLOUD_COMPUTING,binding.cloudComputingText)
+                unsubscribeToTopic(Constants.CLOUD_COMPUTING,binding.mainContentLayout.cloudComputingText)
             }
 
 
         }
-        binding.blockChainCardview.singleClickListener {
+        binding.mainContentLayout.blockChainCardview.singleClickListener {
 
 
 
             if(readSubscription.getBoolean(Constants.BLOCKCHAIN,false)){
 
-                subscribeToTopic(Constants.BLOCKCHAIN,binding.blockchainText)
+                subscribeToTopic(Constants.BLOCKCHAIN,binding.mainContentLayout.blockchainText)
             }
             else{
-                unsubscribeToTopic(Constants.BLOCKCHAIN,binding.blockchainText)
+                unsubscribeToTopic(Constants.BLOCKCHAIN,binding.mainContentLayout.blockchainText)
             }
 
 
 
         }
-        binding.androidDevelopmentCardview.singleClickListener{
+        binding.mainContentLayout.androidDevelopmentCardview.singleClickListener{
 
             if(readSubscription.getBoolean(Constants.ANDROID_DEVELOPMENT,false)){
 
-                subscribeToTopic(Constants.ANDROID_DEVELOPMENT,binding.androidDevelopmentText)
+                subscribeToTopic(Constants.ANDROID_DEVELOPMENT,binding.mainContentLayout.androidDevelopmentText)
             }
             else{
-                unsubscribeToTopic(Constants.ANDROID_DEVELOPMENT,binding.androidDevelopmentText)
+                unsubscribeToTopic(Constants.ANDROID_DEVELOPMENT,binding.mainContentLayout.androidDevelopmentText)
             }
 
         }
 
-        binding.webDevelopmentCardview.singleClickListener {
+        binding.mainContentLayout.webDevelopmentCardview.singleClickListener {
 
 
             if(readSubscription.getBoolean(Constants.WEB_DEVELOPMENT,false)){
 
-                subscribeToTopic(Constants.WEB_DEVELOPMENT,binding.webDevelopmentText)
+                subscribeToTopic(Constants.WEB_DEVELOPMENT,binding.mainContentLayout.webDevelopmentText)
             }
             else{
-                unsubscribeToTopic(Constants.WEB_DEVELOPMENT,binding.webDevelopmentText)
+                unsubscribeToTopic(Constants.WEB_DEVELOPMENT,binding.mainContentLayout.webDevelopmentText)
             }
 
 
@@ -197,19 +212,19 @@ class HomeScreen : BaseFragment<ActivityHomeScreenBinding,HomeScreenViewModel>()
 
 
     private fun unsubscribeToTopic(topic:String,view: TextView){
-        binding.progressBar.visibility = View.VISIBLE
+        binding.mainContentLayout.progressBar.visibility = View.VISIBLE
 
         Firebase.messaging.unsubscribeFromTopic(topic.filter { !it.isWhitespace() })
             .addOnCompleteListener { task ->
                 var msg = "UnSubscribed"
                 if (!task.isSuccessful) {
                     msg = "UnSubscribe failed"
-                    binding.progressBar.visibility = View.GONE
+                    binding.mainContentLayout.progressBar.visibility = View.GONE
                     Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
                 }
                 else{
 
-                    binding.progressBar.visibility = View.GONE
+                    binding.mainContentLayout.progressBar.visibility = View.GONE
                     view.text = "Subscribe"
 //                    var companyName = companyList.get(position).companyName
 //                    edit.putString(companyName,"0")
@@ -225,19 +240,19 @@ class HomeScreen : BaseFragment<ActivityHomeScreenBinding,HomeScreenViewModel>()
     }
 
     fun subscribeToTopic(topic: String,view: TextView){
-        binding.progressBar.visibility = View.VISIBLE
+        binding.mainContentLayout.progressBar.visibility = View.VISIBLE
         Firebase.messaging.subscribeToTopic(topic.filter { !it.isWhitespace() })
             .addOnCompleteListener { task ->
-                binding.progressBar.visibility = View.GONE
+                binding.mainContentLayout.progressBar.visibility = View.GONE
                 var msg = "Subscribed"
                 if (!task.isSuccessful) {
                     msg = "Subscribe failed"
                     Toast.makeText(requireContext(),"Some Problem Occurred",Toast.LENGTH_LONG).show()
-                    binding.progressBar.visibility = View.GONE
+                    binding.mainContentLayout.progressBar.visibility = View.GONE
                 }
                 else{
 
-                    binding.progressBar.visibility = View.GONE
+                    binding.mainContentLayout.progressBar.visibility = View.GONE
                     view.text="Subscribed"
 
 //                database.get().addOnCompleteListener {

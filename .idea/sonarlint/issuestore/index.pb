@@ -17,3 +17,17 @@ A
 gradle.properties,2\a\2afbb999f001938c88fa43fc2ef52abf0f8213e4
 X
 (gradle/wrapper/gradle-wrapper.properties,f\b\fbe448ebfc3eb2d4e308f6b8b043666f5b57235e
+p
+@app/src/main/java/com/vishal/softwarejobalert/Home/HomeScreen.kt,b\0\b0f82ba50251cd6bf2a9197628610fa7fbcb549e
+r
+Bapp/src/main/java/com/vishal/softwarejobalert/ExtensionFunction.kt,a\c\acbaf44bf1b9814bf1ecb5e2d93013fe3b59d966
+j
+:app/src/main/java/com/vishal/softwarejobalert/AppModule.kt,a\4\a4f11cbf9408e92c8e2d950da1933a648c5b8867
+n
+>app/src/main/java/com/vishal/softwarejobalert/MyApplication.kt,0\2\02dd8a7164e354b40327deaac0f3e2c3b8269490
+m
+=app/src/main/java/com/vishal/softwarejobalert/MainActivity.kt,0\d\0d3f05bde11335d8bb6e12a18d9cba0313c53475
+p
+@app/src/main/java/com/vishal/softwarejobalert/utils/Constants.kt,a\4\a49395d56c20839e19ea9f4cd1fa1e2be342926f
+è
+_app/src/main/java/com/vishal/softwarejobalert/Registeration/RegisterationBottomSheetFragment.kt,e\d\edac5a5c09ca0b4b4838beb5728fea51782e4d82
